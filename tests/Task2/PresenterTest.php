@@ -43,9 +43,32 @@ class PresenterTest extends TestCase
         $this->assertEquals(self::EXPECTED_ORDERED_USERS, $actual);
     }
 
+    /**
+     * The method returns Repository
+     *
+     * @param array $users
+     * @return Repository
+     */
     private function createRepository(array $users): Repository
     {
-        // TODO: put your implementation here
-        return null;
+        return new class($users) implements Repository {
+
+            private $users;
+
+            public function __construct($users)
+            {
+                $this->users = $users;
+            }
+
+            /**
+             * The method returns all users array
+             *
+             * @return array
+             */
+            public function getAll(): array
+            {
+                return $this->users;
+            }
+        };
     }
 }

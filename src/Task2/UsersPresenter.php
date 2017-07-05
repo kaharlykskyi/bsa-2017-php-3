@@ -11,9 +11,19 @@ class UsersPresenter
         $this->repository = $repository;
     }
 
+    /**
+     * The method returns sorted list of users by last name in ascending order
+     *
+     * @return array
+     */
     public function getOrderedByLastName(): array
     {
-        // TODO: implement with ascending sort
-        return [];
+        $list = $this->repository->getAll();
+
+        usort($list, function($a, $b){
+            return ($a['last_name'] <=> $b['last_name']);
+        });
+
+        return $list;
     }
 }
